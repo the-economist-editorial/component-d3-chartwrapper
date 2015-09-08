@@ -1,0 +1,12 @@
+@import '@economist/component-d3-barchart';
+
+
+/*  Chart outer wrapper. Width and height are currently
+    set as inline styles, from 'dimensions' preference
+*/
+.d3-chart-outer-wrapper {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  background-color: #dfdfdf;
+}

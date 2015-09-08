@@ -1,0 +1,44 @@
+[
+  {
+    "data": [
+      { "category": "Twenty", "value": 20 },
+      { "category": "Forty", "value": 40 },
+      { "category": "Sixty", "value": 60 },
+      { "category": "Eighty", "value": 80 }
+    ],
+    "margins": { "top": 30, "right": 30, "bottom": 30, "left": 60 },
+    "xDomain": [ 0, 80 ],
+    "yDomain": [],
+    "xOrient": "bottom",
+    "yOrient": "left",
+    "style": "bars"
+  },
+  {
+    "data": [
+      { "category": "Nineteen", "value": 19 },
+      { "category": "Thirtytwo", "value": 32 },
+      { "category": "Forth", "value": 40 },
+      { "category": "Four", "value": 4 }
+    ],
+    "margins": { "top": 30, "right": 30, "bottom": 30, "left": 75 },
+    "xDomain": [ 0, 40 ],
+    "yDomain": [],
+    "xOrient": "top",
+    "yOrient": "left",
+    "style": "bars"
+  },
+  {
+    "data": [
+      { "category": "One-twenty", "value": 120 },
+      { "category": "One-fortynine", "value": 149 },
+      { "category": "Sixty", "value": 60 },
+      { "category": "Seventyfive", "value": 75 }
+    ],
+    "margins": { "top": 30, "right": 30, "bottom": 30, "left": 100 },
+    "xDomain": [ 0, 150 ],
+    "yDomain": [],
+    "xOrient": "bottom",
+    "yOrient": "left",
+    "style": "bars"
+  }
+]

@@ -1,0 +1,94 @@
+{
+  "name": "@economist/component-d3-chartwrapper",
+  "version": "1.0.0",
+  "description": "Outer wrapper for React/D3 chart components",
+  "author": "The Economist (http://economist.com)",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/the-economist-editorial/component-d3-chartwrapper.git"
+  },
+  "homepage": "http://github.com/the-economist-editorial/component-d3-chartwrapper",
+  "bugs": {
+    "url": "http://github.com/the-economist-editorial/component-d3-chartwrapper/issues"
+  },
+  "main": "index.js",
+  "files": [
+    "*.js",
+    "*.css",
+    "assets/*"
+  ],
+  "eslintConfig": {
+    "extends": "strict/react"
+  },
+  "component-devserver": {
+    "example": "./example.es6",
+    "css": [
+      "/node_modules/mocha/mocha.css",
+      "/index.css"
+    ],
+    "js": [
+      "/node_modules/react/react.js?browserify&expose=react",
+      {
+        "contents": "window.React = require('react');"
+      },
+      "/index.es6?babelify&debug&expose=index.es6&external=react",
+      "/example.es6?babelify&debug&expose=example.es6&external=react",
+      {
+        "contents": "require('react').render(require('example.es6'),document.getElementById('component-preview'));"
+      },
+      "/node_modules/mocha/mocha.js",
+      "/node_modules/@economist/component-testharness/node_modules/chai/chai.js",
+      "/node_modules/@economist/component-testharness/node_modules/chai-things/lib/chai-things.js",
+      "/node_modules/@economist/component-testharness/node_modules/chai-as-promised/lib/chai-as-promised.js",
+      "/node_modules/@economist/component-testharness/node_modules/chai-spies/chai-spies.js",
+      {
+        "contents": "chai.should();mocha.setup('bdd');"
+      },
+      "/test/index.es6?babelify&debug&external=react",
+      {
+        "contents": "mocha.checkLeaks();mocha.run();"
+      }
+    ],
+    "html": [
+      {
+        "contents": "<div class='component-panel'><h2 class='component-panel-heading'>Tests</h2><div id='mocha' class='test-output'></div></div>"
+      }
+    ]
+  },
+  "config": {
+    "lint_opts": "--ignore-path .gitignore --ext .es6"
+  },
+  "scripts": {
+    "lint": "eslint $npm_package_config_lint_opts .",
+    "prepublish": "babel index.es6 --source-maps=inline --stage=0 --loose > index.js",
+    "provision": "devpack-configure ./package.json",
+    "serve": "component-devserver .",
+    "test": "npm run test:base -- -R tap",
+    "test:base": "mocha -r babel/register -r @economist/component-testharness",
+    "test:watch": "npm run test:base -- -wR min"
+  },
+  "dependencies": {
+    "react": "^0.13.3",
+    "@economist/component-d3-barchart": "^1.1.0"   
+  },
+  "devDependencies": {
+    "@economist/component-devpack": "^2.5.0",
+    "@economist/component-devserver": "^2.0.0",
+    "@economist/component-testharness": "^1.1.0",
+    "babel": "^5.5.8",
+    "eslint": "^0.24.0",
+    "eslint-config-strict": "^2.4.0",
+    "eslint-plugin-filenames": "^0.1.1",
+    "eslint-plugin-one-variable-per-var": "^0.0.3",
+    "eslint-plugin-react": "^2.6.3",
+    "mocha": "^2.2.5",
+    "pre-commit": "^1.0.10"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "pre-commit": [
+    "lint"
+  ]
+}
