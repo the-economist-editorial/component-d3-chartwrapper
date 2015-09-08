@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; 
 import D3BarChart from '@economist/component-d3-barchart';
 
 // Load raw data (is this right?)

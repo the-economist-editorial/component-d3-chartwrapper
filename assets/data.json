@@ -4,7 +4,7 @@
       { "category": "Twenty", "value": 20 },
       { "category": "Forty", "value": 40 },
       { "category": "Sixty", "value": 60 },
-      { "category": "Eighty", "value": 80 }
+      { "category": "Eighty", "value": 80 } 
     ],
     "margins": { "top": 30, "right": 30, "bottom": 30, "left": 60 },
     "xDomain": [ 0, 80 ],
