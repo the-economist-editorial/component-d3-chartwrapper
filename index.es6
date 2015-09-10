@@ -97,10 +97,10 @@ export default class D3ChartWrapper extends React.Component {
     const counter2 = this.state.counter + 2;
     setTimeout(() => {
       this.setState({ 'counter': counter1 });
-    }, 2000);
+    }, 5000);
     setTimeout(() => {
       this.setState({ 'counter': counter2 });
-    }, 4000);
+    }, 10000);
   }
   // COMPONENT DID MOUNT ends
 

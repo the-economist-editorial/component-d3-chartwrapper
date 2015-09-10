@@ -20,11 +20,11 @@
       { "category": "Forth", "value": 40 },
       { "category": "Four", "value": 4 }
     ],
-    "margins": { "top": 30, "right": 30, "bottom": 30, "left": 75 },
+    "margins": { "top": 30, "right": 100, "bottom": 30, "left": 20 },
     "xDomain": [ 0, 40 ],
     "yDomain": [],
     "xOrient": "top",
-    "yOrient": "left",
+    "yOrient": "right",
     "style": "bars"
   },
   {
