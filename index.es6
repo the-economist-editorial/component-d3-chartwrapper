@@ -1,9 +1,7 @@
-import React from 'react'; 
+import React from 'react';
 import D3BarChart from '@economist/component-d3-barchart';
-
 // Load raw data (is this right?)
 const customData = require('./assets/data.json');
-
 export default class D3ChartWrapper extends React.Component {
 
   // PROP TYPES
@@ -11,6 +9,7 @@ export default class D3ChartWrapper extends React.Component {
     return {
       counter: React.PropTypes.number,
       dimensions: React.PropTypes.object,
+      duration: React.PropTypes.number,
       hardData: React.PropTypes.array,
       test: React.PropTypes.string,
     };
@@ -24,7 +23,7 @@ export default class D3ChartWrapper extends React.Component {
       counter: 0,
       duration: 1000,
       dimensions: { outerWidth: 500, outerHeight: 300 },
-      // Array of hard data: another node is called on each increment 
+      // Array of hard data: another node is called on each increment
       // of the counter
       // Now loading data from external file... above
       hardData: [
@@ -41,7 +40,7 @@ export default class D3ChartWrapper extends React.Component {
           yDomain: [],
           xOrient: 'bottom',
           yOrient: 'left',
-          style: 'bars'
+          style: 'bars',
         },
         // 1
         {
@@ -56,7 +55,7 @@ export default class D3ChartWrapper extends React.Component {
           yDomain: [],
           xOrient: 'top',
           yOrient: 'left',
-          style: 'bars'
+          style: 'bars',
         },
         // 2
         {
@@ -71,12 +70,12 @@ export default class D3ChartWrapper extends React.Component {
           yDomain: [],
           xOrient: 'bottom',
           yOrient: 'left',
-          style: 'bars'
+          style: 'bars',
         },
       ],
     };
   }
-  // DEFAULT PROPS ends 
+  // DEFAULT PROPS ends
 
   // CONSTRUCTOR
   //    bind handleResize to this component
@@ -86,7 +85,7 @@ export default class D3ChartWrapper extends React.Component {
     this.state = {
       counter: this.props.counter,
       data: customData,
-    }
+    };
   }
   // CONSTRUCTOR ends
 
@@ -109,8 +108,10 @@ export default class D3ChartWrapper extends React.Component {
   // Calculates child component's d3 margins
   getBounds(counter) {
     const dimensions = this.props.dimensions;
-    //const margins = this.props.hardData[counter].margins;
+    // console.log(dimensions);
+    // const margins = this.props.hardData[counter].margins;
     const margins = this.state.data[counter].margins;
+    // console.log(margins);
     const outerH = dimensions.outerHeight;
     const outerW = dimensions.outerWidth;
     const innerW = outerW - margins.left - margins.right;
@@ -126,20 +127,17 @@ export default class D3ChartWrapper extends React.Component {
 
 
   // RENDER
-  // While I'm doing the sneaky trick with the counter, 
+  // While I'm doing the sneaky trick with the counter,
   // assemble the data object and throw it at the component
   render() {
     // For now, at least, component size is set with an inline style
-
-    console.log(this.state.data);
-
     const chartDims = {
       height: this.props.dimensions.outerHeight,
       width: this.props.dimensions.outerWidth,
     };
     // Configuration
     const counter = this.state.counter;
-    // const config = this.props.haardData[counter];
+    // const config = this.props.hardData[counter];
     const config = this.state.data[counter];
     // Other, 'higher-level' properties:
     config.duration = this.props.duration;
