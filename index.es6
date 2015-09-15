@@ -1,17 +1,17 @@
 import React from 'react';
-import D3BarChart from '@economist/component-d3-barchart';
-// Load raw data (is this right?)
+
+import ImageCaption from '@economist/component-imagecaption';
+
 const customData = require('./assets/data.json');
-export default class D3ChartWrapper extends React.Component {
+
+// Load raw data (is this right?)
+// const customData = require('./assets/data.json');
+export default class DigDeeper extends React.Component {
 
   // PROP TYPES
   static get propTypes() {
     return {
-      counter: React.PropTypes.number,
-      dimensions: React.PropTypes.object,
-      duration: React.PropTypes.number,
-      hardData: React.PropTypes.array,
-      test: React.PropTypes.string,
+      expanded: React.PropTypes.bool,
     };
   }
   // PROP TYPES ends
@@ -19,60 +19,9 @@ export default class D3ChartWrapper extends React.Component {
   // DEFAULT PROPS
   static get defaultProps() {
     return {
-      // Counter is just for demonstration purposes
-      counter: 0,
-      duration: 1000,
-      dimensions: { outerWidth: 500, outerHeight: 300 },
-      // Array of hard data: another node is called on each increment
-      // of the counter
-      // Now loading data from external file... above
-      hardData: [
-        // 0
-        {
-          data: [
-            { 'category': 'Twenty', 'value': 20 },
-            { 'category': 'Forty', 'value': 40 },
-            { 'category': 'Sixty', 'value': 60 },
-            { 'category': 'Eighty', 'value': 80 },
-          ],
-          margins: { top: 30, right: 30, bottom: 30, left: 100 },
-          xDomain: [ 0, 80 ],
-          yDomain: [],
-          xOrient: 'bottom',
-          yOrient: 'left',
-          style: 'bars',
-        },
-        // 1
-        {
-          data: [
-            { 'category': 'Nineteen', 'value': 19 },
-            { 'category': 'Thirtytwo', 'value': 32 },
-            { 'category': 'Forth', 'value': 40 },
-            { 'category': 'Four', 'value': 4 },
-          ],
-          margins: { top: 30, right: 30, bottom: 30, left: 100 },
-          xDomain: [ 0, 40 ],
-          yDomain: [],
-          xOrient: 'top',
-          yOrient: 'left',
-          style: 'bars',
-        },
-        // 2
-        {
-          data: [
-            { 'category': 'One-twenty', 'value': 120 },
-            { 'category': 'One-thirtytwo', 'value': 132 },
-            { 'category': 'Sixty', 'value': 60 },
-            { 'category': 'Seventyfive', 'value': 75 },
-          ],
-          margins: { top: 30, right: 30, bottom: 30, left: 100 },
-          xDomain: [ 0, 150 ],
-          yDomain: [],
-          xOrient: 'bottom',
-          yOrient: 'left',
-          style: 'bars',
-        },
-      ],
+      // data: './assets/data.json',
+      expanded: false,
+      maxHeight:"1000px"
     };
   }
   // DEFAULT PROPS ends
@@ -83,80 +32,108 @@ export default class D3ChartWrapper extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      counter: this.props.counter,
       data: customData,
+      expanded: this.props.expanded,
+      heightSet: false,
+
     };
   }
   // CONSTRUCTOR ends
 
-  // COMPONENT DID MOUNT
-  // For ***TESTING***, just sets a couple of timeouts and increments
-  // a counter to kickstart re-render with new data...
-  componentDidMount() {
-    const counter1 = this.state.counter + 1;
-    const counter2 = this.state.counter + 2;
-    setTimeout(() => {
-      this.setState({ 'counter': counter1 });
-    }, 2000);
-    setTimeout(() => {
-      this.setState({ 'counter': counter2 });
-    }, 4000);
-  }
-  // COMPONENT DID MOUNT ends
+  // componentDidMount() {
+  //   let maxHeight = document.getElementsByClassName("daily-features-expandable-content")[0].offsetHeight;
+  //   console.log("Initial maxHeight = " + maxHeight);
+  //   if (maxHeight > 0) {
+  //     maxHeight += "px";
+  //   }
+  //   // console.log("Did update to " + maxHeight);
+  //   document.getElementsByClassName("daily-features-expandable-content")[0].style.maxHeight = maxHeight;
+  // }
 
-  // GET BOUNDS
-  // Calculates child component's d3 margins
-  getBounds(counter) {
-    const dimensions = this.props.dimensions;
-    // console.log(dimensions);
-    // const margins = this.props.hardData[counter].margins;
-    const margins = this.state.data[counter].margins;
-    // console.log(margins);
-    const outerH = dimensions.outerHeight;
-    const outerW = dimensions.outerWidth;
-    const innerW = outerW - margins.left - margins.right;
-    const innerH = outerH - margins.top - margins.bottom;
-    return {
-      'left': margins.left,
-      'top': margins.top,
-      'width': innerW,
-      'height': innerH,
-    };
+  componentDidUpdate() {
+    const myHeight = document.getElementsByClassName("daily-features-expandable-content")[0].offsetHeight;
+    console.log("Current height of div = " + myHeight);
+    let heightSet = this.state.heightSet;
+    if (!heightSet && myHeight > 0) {
+      // I.e., if I haven't overwritten the default CSS yet
+      // console.log("I have one chance to reset the CSS now...");
+      this.state.heightSet = true;
+      this.rewriteExpandedCSS(myHeight);
+    }
   }
-  // GET BOUNDS ends
 
+  expandingButtonClick() {
+    let expanded = this.state.expanded;
+    this.setState({
+      expanded: !expanded,
+    });
+  }
+
+  rewriteExpandedCSS(maxHeight) {
+    console.log("Reset CSS rule to maxheight of " + maxHeight);
+    const mhStr = maxHeight + "px";
+    // Find the rule:
+    const allCSS = document.styleSheets;
+    let cssLen = allCSS.length;
+    const myCSSList = allCSS[cssLen - 1].cssRules;
+    cssLen = myCSSList.length;
+    const cssRule = myCSSList[cssLen - 1];
+    console.log(cssRule.cssText);
+    // cssRule.cssText = '\.expanded  { max-height: ' + maxHeight + 'px; transition: max-height 1s ease-out; }';
+    cssRule.style.setProperty('max-height', mhStr, null)
+    console.log(cssRule.cssText);
+  }
 
   // RENDER
-  // While I'm doing the sneaky trick with the counter,
-  // assemble the data object and throw it at the component
   render() {
-    // For now, at least, component size is set with an inline style
-    const chartDims = {
-      height: this.props.dimensions.outerHeight,
-      width: this.props.dimensions.outerWidth,
-    };
-    // Configuration
-    const counter = this.state.counter;
-    // const config = this.props.hardData[counter];
-    const config = this.state.data[counter];
-    // Other, 'higher-level' properties:
-    config.duration = this.props.duration;
-    config.bounds = this.getBounds(counter);
-    // Now: what style?
-    let childComponent;
-    switch (config.style) {
-      case 'bars':
-        childComponent = <D3BarChart config={config}/>;
-        break;
-      // Other styles to come...
-      default:
-        childComponent = <D3BarChart config={config}/>;
-        break;
+    const data = this.state.data;
+    // Image
+    const imageSrc = data.image.src;
+    const imageCaption = data.image.caption;
+    const imgWrapper = (
+      <div className = 'daily-features-map-wrapper'>
+        <div>
+          <ImageCaption caption={imageCaption} src={imageSrc}/>
+        </div>
+      </div>
+    );
+    // Extra text
+    const textHead = data.text.header;
+    const textBody = data.text.body;
+    // Expanding div
+    // Button strings
+    const buttonOpenStr = 'Dig deeper';
+    const buttonCloseStr = 'Close';
+    let content = '';
+        content = data.expandedcontent;
+    // Expansion class
+    let expansionClass = 'daily-features-expandable-content';
+    if (this.state.expanded) {
+      expansionClass += ' expanded'
     }
-    // Embed whichever child component in the outer wrapper:
+    //console.log('Set maxheight to ' + this.state.maxHeight);
     return (
-      <div className="d3-chart-outer-wrapper" style={chartDims}>
-        {childComponent}
+      <div className="daily-features-outer-wrapper">
+        <div className = "daily-features-image-wrapper">
+            <ImageCaption className="daily-features-image-caption" caption={imageCaption} src={imageSrc}/>
+        </div>
+        <div className="daily-features-text-wrapper">
+          <p className="daily-features-text-header">{textHead}</p>
+          <p className="daily-features-text-body">{textBody}</p>
+        </div>
+
+        <div className="daily-features-expandable-wrapper">
+          <div className={expansionClass}>
+            {content}
+          </div>
+          <div className="daily-features-expandable-button-wrapper">
+            <div className="daily-features-expandable-button"
+              onClick={this.expandingButtonClick.bind(this)}>
+              {buttonOpenStr}
+            </div>
+          </div>
+        </div>
+
       </div>
     );
   }

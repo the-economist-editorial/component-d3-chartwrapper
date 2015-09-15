@@ -1,44 +1,11 @@
-[
-  {
-    "data": [
-      { "category": "Twenty", "value": 20 },
-      { "category": "Forty", "value": 40 },
-      { "category": "Sixty", "value": 60 },
-      { "category": "Eighty", "value": 80 } 
-    ],
-    "margins": { "top": 30, "right": 30, "bottom": 30, "left": 60 },
-    "xDomain": [ 0, 80 ],
-    "yDomain": [],
-    "xOrient": "bottom",
-    "yOrient": "left",
-    "style": "bars"
+{
+  "image": {
+    "src": "./images/Russia.png",
+    "caption": "Main caption text"
   },
-  {
-    "data": [
-      { "category": "Nineteen", "value": 19 },
-      { "category": "Thirtytwo", "value": 32 },
-      { "category": "Forth", "value": 40 },
-      { "category": "Four", "value": 4 }
-    ],
-    "margins": { "top": 30, "right": 30, "bottom": 30, "left": 75 },
-    "xDomain": [ 0, 40 ],
-    "yDomain": [],
-    "xOrient": "top",
-    "yOrient": "left",
-    "style": "bars"
+  "text": {
+    "header": "Text header",
+    "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
   },
-  {
-    "data": [
-      { "category": "One-twenty", "value": 120 },
-      { "category": "One-fortynine", "value": 149 },
-      { "category": "Sixty", "value": 60 },
-      { "category": "Seventyfive", "value": 75 }
-    ],
-    "margins": { "top": 30, "right": 30, "bottom": 30, "left": 100 },
-    "xDomain": [ 0, 150 ],
-    "yDomain": [],
-    "xOrient": "bottom",
-    "yOrient": "left",
-    "style": "bars"
-  }
-]
+  "expandedcontent": "Content goes here<br/>Content goes here<br/>Content goes here<br/>Content goes here<br/Content goes here<br/Content goes here<br/Content goes here<br/Content goes here<br/Content goes here<br/Content goes here<br/Content goes here<br/Content goes here<br/Content goes here<br/Content goes here<br/Content goes here<br/Content goes here<br/>"
+}
