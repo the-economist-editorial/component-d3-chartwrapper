@@ -1,6 +1,6 @@
 import React from 'react';
 import D3BarChart from '@economist/component-d3-barchart';
-// Load raw data (is this right?)
+// Load raw data (is this OK?)
 const customData = require('./assets/data.json');
 export default class D3ChartWrapper extends React.Component {
 

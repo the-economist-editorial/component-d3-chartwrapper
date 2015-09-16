@@ -1,7 +1,7 @@
 {
   "name": "@economist/component-d3-chartwrapper",
   "version": "1.0.0",
-  "description": "Outer wrapper for React/D3 chart components",
+  "description": "Outer wrapper for React/D3 chart components ",
   "author": "The Economist (http://economist.com)",
   "license": "ISC",
   "repository": {
@@ -70,7 +70,7 @@
   },
   "dependencies": {
     "react": "^0.13.3",
-    "@economist/component-d3-barchart": "^1.1.0"   
+    "@economist/component-d3-barchart": "^1.1.0"
   },
   "devDependencies": {
     "@economist/component-devpack": "^2.5.0",
@@ -92,4 +92,3 @@
     "lint"
   ]
 }
-
