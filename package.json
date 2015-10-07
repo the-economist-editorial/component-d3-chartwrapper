@@ -1,6 +1,6 @@
 {
   "name": "@economist/component-d3-chartwrapper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Outer wrapper for React/D3 chart components ",
   "author": "The Economist (http://economist.com)",
   "license": "ISC",
