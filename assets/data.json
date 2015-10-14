@@ -1,7 +1,7 @@
 {
   "context": "print",
   "data": [
-    { "category": "Ten", "value": 10 },
+    { "category": "Twenty", "value": 20 },
     { "category": "Forty", "value": 40 },
     { "category": "Seventy", "value": 70 },
     { "category": "Eighty", "value": 80 }
