@@ -1,7 +1,5 @@
 import React from 'react';
 import D3BarChart from '@economist/component-d3-barchart';
-// Load raw data (is this OK?)
-//const customData = require('./assets/data.json');
 export default class D3ChartWrapper extends React.Component {
 
   // PROP TYPES
@@ -64,6 +62,7 @@ export default class D3ChartWrapper extends React.Component {
   // assemble the data object and throw it at the component
   render() {
     const config = this.state.data;
+    console.log(config);
     // For now, duration of d3 transitions (not that there are any!) is defined here
     config.duration = this.props.duration;
     // D3 bounds are derived from the data.
@@ -80,6 +79,7 @@ export default class D3ChartWrapper extends React.Component {
         childComponent = <D3BarChart config={config}/>;
         break;
     }
+    
     // Embed whichever child component in the outer wrapper:
     return (
       <div className="d3-chart-outer-wrapper" style={config.dimensions}>

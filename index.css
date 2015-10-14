@@ -7,7 +7,7 @@
 
 .d3-chart-outer-wrapper {
   position: absolute;
-  top: 100px;
-  left: 100px;
+  top: 10px;
+  left: 10px;
   background-color: #dfdfdf;
 }
